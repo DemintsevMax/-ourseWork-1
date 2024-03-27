@@ -13,6 +13,13 @@ public class Main {
         employees[9] = new Employee("Святая Вероника", 3, 112_000);
 
         printAllEmployeesData(employees);
+        System.out.println("Сумма затрат на ЗП: " + calculateTotalSalaryExpenses(employees));
+        System.out.println("Сотрудник с минимальной ЗП: " + findEmployeeWithMinSalary(employees));
+        System.out.println("Сотрудник с максимальной ЗП: " + findEmployeeWithMaxSalary(employees));
+        System.out.println("Вычисление средней ЗП:  "
+                + calculateAverageSalary(employees,calculateTotalSalaryExpenses(employees)));
+        printFullNamesOfEmployees(employees);
+
 
 
     }
@@ -23,23 +30,52 @@ public class Main {
         }
     }
 
-
+    // Метод для расчета общих затрат на зарплату.
     public static double calculateTotalSalaryExpenses(Employee[] employees) {
-        // Метод для расчета общих затрат на зарплату.
         double totalSalary = 0;
-        for (Employee empl : employees)// Цикл для прохода по массиву сотрудников.
-        {
+        // Цикл для прохода по массиву сотрудников.
+        for (Employee empl : employees) {
             totalSalary += empl.getSalary();
         }
         return totalSalary;
     }
-    public static Employee findEmployeeWithMinSalary(Employee[] employees){
-        // Метод для поиска сотрудника с минимальной зарплатой.
-        int minSalaryEmployee = employees[0].getId();
-        double minSalary = employees[0].getSalary(); // Переменная для хранения минимальной зарплаты.
-        for(Employee empl)
-        }
 
+    // Метод для поиска сотрудника с минимальной зарплатой.
+    public static Employee findEmployeeWithMinSalary(Employee[] employees) {
+        int minSalaryEmployee = employees[0].getId();
+        double minSalary = employees[0].getSalary();
+        for (Employee empl : employees) {
+            if (empl.getSalary() < minSalary) {
+                minSalary = empl.getSalary();
+                minSalaryEmployee = empl.getId();
+            }
+        }
+        return employees[minSalaryEmployee - 1];
+    }
+
+    // Метод для поиска сотрудника с максимальной зарплатой.
+    public static Employee findEmployeeWithMaxSalary(Employee[] employees) {
+        int maxSalaryEmployee = employees[0].getId();
+        double maxSalary = employees[0].getSalary();
+        for (Employee empl : employees) {
+            if (empl.getSalary() > maxSalary) {
+                maxSalary = empl.getSalary();
+                maxSalaryEmployee = empl.getId();
+            }
+        }
+        return employees[maxSalaryEmployee - 1];
+    }
+
+    // Метод для расчета средней зарплаты.
+    public static double calculateAverageSalary(Employee[] employees, double totalSalary) {
+        int totalEmployees = employees.length;
+        return totalSalary / totalEmployees;
+    }
+    // Метод для печати полных имен всех сотрудников.
+    public static void printFullNamesOfEmployees(Employee[]employees){
+        for (Employee empl : employees){
+            System.out.println(empl.getFullName());
+        }
     }
 }
 
