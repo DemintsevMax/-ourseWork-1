@@ -10,16 +10,18 @@ public class Main {
         employees[6] = new Employee("Кабаева Алина", 4, 93_000);
         employees[7] = new Employee("Медведев Дима", 2, 68_000);
         employees[8] = new Employee("Пушкин Александр", 1, 98_000);
-        employees[9] = new Employee("Святая Вероника", 3, 112_000);
+        employees[9] = new Employee("Святая Вероника", 4, 112_000);
 
         printAllEmployeesData(employees);
         System.out.println("Сумма затрат на ЗП: " + calculateTotalSalaryExpenses(employees));
         System.out.println("Сотрудник с минимальной ЗП: " + findEmployeeWithMinSalary(employees));
         System.out.println("Сотрудник с максимальной ЗП: " + findEmployeeWithMaxSalary(employees));
         System.out.println("Вычисление средней ЗП:  "
-                + calculateAverageSalary(employees,calculateTotalSalaryExpenses(employees)));
+                + calculateAverageSalary(employees, calculateTotalSalaryExpenses(employees)));
         printFullNamesOfEmployees(employees);
-
+        System.out.println("Мин ЗП по отделу:  " + minimumSalaryByDepartment(employees, 2));
+        System.out.println("Макс ЗП по отделу:   " + maximumSalaryByDepartment(employees, 1));
+        System.out.println("Смумма ЗП на отдел:  " + totalSalariesDepartment(employees, 4));
 
 
     }
@@ -71,18 +73,55 @@ public class Main {
         int totalEmployees = employees.length;
         return totalSalary / totalEmployees;
     }
+
     // Метод для печати полных имен всех сотрудников.
-    public static void printFullNamesOfEmployees(Employee[]employees){
-        for (Employee empl : employees){
+    public static void printFullNamesOfEmployees(Employee[] employees) {
+        for (Employee empl : employees) {
             System.out.println(empl.getFullName());
         }
     }
-    public static double minimumSalaryByDepartment(Employee[]employees, int department){
-        int totalEmployees =
 
+    public static Employee minimumSalaryByDepartment(Employee[] employees, int department) {
+        int minSalaryEmployee = employees[0].getId();
+        double minSalary = employees[0].getSalary();
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department && empl.getSalary() < minSalary) {
+                minSalary = empl.getSalary();
+                minSalaryEmployee = empl.getId();
+            }
+
+        }
+        return employees[minSalaryEmployee - 1];
 
     }
+
+    public static Employee maximumSalaryByDepartment(Employee[] employees, int department) {
+        int maxSalaryEmployee = employees[0].getId();
+        double maxSalary = employees[0].getSalary();
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department && empl.getSalary() > maxSalary) {
+                maxSalary = empl.getSalary();
+                maxSalaryEmployee = empl.getId();
+            }
+        }
+        return employees[maxSalaryEmployee - 1];
+    }
+
+    public static double totalSalariesDepartment(Employee[] employees, int department) {
+        double totalSalary = 0;
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department) {
+                totalSalary += empl.getSalary();
+            }
+        }
+        return totalSalary;
+    }
+
+
+
 }
+
+
 
 
 
