@@ -77,6 +77,11 @@ public class Main {
             System.out.println(empl.getFullName());
         }
     }
+    public static double minimumSalaryByDepartment(Employee[]employees, int department){
+        int totalEmployees =
+
+
+    }
 }
 
 
