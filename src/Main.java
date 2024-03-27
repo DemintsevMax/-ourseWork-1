@@ -5,12 +5,12 @@ public class Main {
         employees[1] = new Employee("Смирнов Сергей", 3, 100_000);
         employees[2] = new Employee("Иванов Иван", 2, 89_000);
         employees[3] = new Employee("Молев Дима", 4, 56_000);
-        employees[4] = new Employee("Мусаев Мухаммед Ибрагим оглы", 1, 65_000);
-        employees[5] = new Employee("Снежков Алексей", 2, 77_000);
+        employees[4] = new Employee("Мусаев Мухаммед Ибрагим оглы", 3, 65_000);
+        employees[5] = new Employee("Снежков Алексей", 5, 77_000);
         employees[6] = new Employee("Кабаева Алина", 4, 93_000);
         employees[7] = new Employee("Медведев Дима", 2, 68_000);
         employees[8] = new Employee("Пушкин Александр", 1, 98_000);
-        employees[9] = new Employee("Святая Вероника", 4, 112_000);
+        employees[9] = new Employee("Святая Вероника", 5, 112_000);
 
         printAllEmployeesData(employees);
         System.out.println("Сумма затрат на ЗП: " + calculateTotalSalaryExpenses(employees));
@@ -19,9 +19,13 @@ public class Main {
         System.out.println("Вычисление средней ЗП:  "
                 + calculateAverageSalary(employees, calculateTotalSalaryExpenses(employees)));
         printFullNamesOfEmployees(employees);
-        System.out.println("Мин ЗП по отделу:  " + minimumSalaryByDepartment(employees, 2));
-        System.out.println("Макс ЗП по отделу:   " + maximumSalaryByDepartment(employees, 1));
+        System.out.println("Мин ЗП по отделу:  " + minimumSalaryByDepartment(employees, 1));
+        System.out.println("Макс ЗП по отделу:   " + maximumSalaryByDepartment(employees, 2));
         System.out.println("Смумма ЗП на отдел:  " + totalSalariesDepartment(employees, 4));
+        System.out.println("Средняя ЗП по отделу: "
+                + calculateAverageSalaryDepartment(employees, 1));
+        System.out.println("indexSalaryDepartment(employees,2,10) = "
+                + indexSalaryDepartment(employees, 2, 10));
 
 
     }
@@ -117,9 +121,35 @@ public class Main {
         return totalSalary;
     }
 
+    public static double calculateAverageSalaryDepartment(Employee[] employees, int department) {
+        double totalSalary = 0;
+        int counter = 0;
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department) {
+                totalSalary += empl.getSalary();
+                counter++;
+            }
+        }
+        return totalSalary / counter;
+    }
+    public static double indexSalaryDepartment(Employee[] employees,int department, double percent) {
+        for (Employee empl : employees) {
+            if(empl.getDepartment()== department){
+            double indexSalary=empl.getSalary()*(percent/100);
+            empl.setSalary(indexSalary);
+        }
+
+
 
 
 }
+
+
+
+
+
+
+
 
 
 
