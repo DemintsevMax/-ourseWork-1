@@ -14,18 +14,29 @@ public class Main {
 
         printAllEmployeesData(employees);
         System.out.println("Сумма затрат на ЗП: " + calculateTotalSalaryExpenses(employees));
+        System.out.println(" ");
         System.out.println("Сотрудник с минимальной ЗП: " + findEmployeeWithMinSalary(employees));
+        System.out.println(" ");
         System.out.println("Сотрудник с максимальной ЗП: " + findEmployeeWithMaxSalary(employees));
-        System.out.println("Вычисление средней ЗП:  "
-                + calculateAverageSalary(employees, calculateTotalSalaryExpenses(employees)));
+        System.out.println(" ");
+        System.out.println("Вычисление средней ЗП:  " + calculateAverageSalary(employees, calculateTotalSalaryExpenses(employees)));
         printFullNamesOfEmployees(employees);
+        System.out.println(" ");
         System.out.println("Мин ЗП по отделу:  " + minimumSalaryByDepartment(employees, 1));
+        System.out.println(" ");
         System.out.println("Макс ЗП по отделу:   " + maximumSalaryByDepartment(employees, 2));
+        System.out.println(" ");
         System.out.println("Смумма ЗП на отдел:  " + totalSalariesDepartment(employees, 4));
-        System.out.println("Средняя ЗП по отделу: "
-                + calculateAverageSalaryDepartment(employees, 1));
-        System.out.println("indexSalaryDepartment(employees,2,10) = "
-                + indexSalaryDepartment(employees, 2, 10));
+        System.out.println(" ");
+        System.out.println("Средняя ЗП по отделу: " + calculateAverageSalaryDepartment(employees, 1));
+        System.out.println(" ");
+        indexSalaryDepartment(employees, 2, 10);
+        System.out.println(" ");
+        printAllEmployeesDepartment(employees, 2);
+        System.out.println(" ");
+        printEmployeesWithSalaryBelow(employees, 70_000);
+        System.out.println(" ");
+        printEmployeesWithSalaryAbove(employees, 70_000);
 
 
     }
@@ -132,19 +143,41 @@ public class Main {
         }
         return totalSalary / counter;
     }
-    public static double indexSalaryDepartment(Employee[] employees,int department, double percent) {
+
+    public static void indexSalaryDepartment(Employee[] employees, int department, double percent) {
         for (Employee empl : employees) {
-            if(empl.getDepartment()== department){
-            double indexSalary=empl.getSalary()*(percent/100);
-            empl.setSalary(indexSalary);
+            if (empl.getDepartment() == department) {
+                double indexSalary = empl.getSalary() * (1 + percent / 100);
+                empl.setSalary(indexSalary);
+
+            }
         }
+    }
 
+    public static void printAllEmployeesDepartment(Employee[] employees, int department) {
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department) {
+                System.out.println(empl.getFullName() + " " + empl.getSalary());
+            }
+        }
+    }
 
+    public static void printEmployeesWithSalaryBelow(Employee[] employees, double number) {
+        for (Employee empl : employees) {
+            if (empl.getSalary() < number) {
+                System.out.println(empl.getId() + " " + empl.getFullName() + " " + empl.getSalary());
+            }
+        }
+    }
 
-
+    public static void printEmployeesWithSalaryAbove(Employee[] employees, double number) {
+        for (Employee empl : employees) {
+            if (empl.getSalary() > number) {
+                System.out.println(empl.getId() + " " + empl.getFullName() + " " + empl.getSalary());
+            }
+        }
+    }
 }
-
-
 
 
 
