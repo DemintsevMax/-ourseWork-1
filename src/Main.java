@@ -143,4 +143,67 @@ public class Main {
 
     }
 
+    // Метод для вычисления всей зарплаты на отдел
+    public static double calculateTotalSalaryInDepartment(int department) {
+        double totalSalary = 0;
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department) {
+                totalSalary += empl.getSalary();
+            }
+
+        }
+        return totalSalary;
+    }
+
+    public static double calculateAverageSalaryDepartment(int department) {
+        double totalSalary = 0;
+        int counter = 0;
+
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department) {
+                totalSalary += empl.getSalary();
+                counter++;
+            }
+        }
+        if (counter == 0) {
+            return 0;
+        }
+        return totalSalary / counter;
+    }
+
+    public static void indexAllSalaryInDepartment(double percent, int department) {
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department) {
+                double indexSalary = empl.getSalary() * (1 + percent / 100);
+                empl.setSalary(indexSalary);
+            }
+        }
+    }
+
+    public static void printEmployeeInDepartment(int department) {
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department) {
+                System.out.println(empl.getId() + " Ф.И.О " + empl.getFullName() + " " + empl.getSalary());
+            }
+        }
+    }
+
+    public static void printEmployeesWithSalaryBelow(double number) {
+        for (Employee empl : employees) {
+            if (empl.getSalary() < number) {
+                System.out.println(empl.getId() + " " + empl.getFullName() + " " + empl.getSalary());
+            }
+        }
+    }
+
+    public static void printEmployeesWithSalaryAbove(double number) {
+        for (Employee empl : employees) {
+            if (empl.getSalary() > number) {
+                System.out.println(empl.getId() + " " + empl.getFullName() + " " + empl.getSalary());
+            }
+        }
+    }
+}
+
+
 
