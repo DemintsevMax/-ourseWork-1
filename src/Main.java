@@ -1,5 +1,3 @@
-import java.sql.SQLOutput;
-
 public class Main {
     static Employee[] employees = new Employee[10];
 
@@ -40,14 +38,12 @@ public class Main {
         System.out.println("Сумма ЗП на отдел: " + calculateTotalSalaryInDepartment(2));
         System.out.println(" ");
         System.out.println("Индексируем зарплату по отделу ");
-        indexAllSalaryInDepartment(15,3);
+        indexAllSalaryInDepartment(15, 3);
         printEmployeeInDepartment(3);
         System.out.println(" ");
         printEmployeesWithSalaryBelow(98_888);
         System.out.println(" ");
         printEmployeesWithSalaryAbove(98_888);
-
-
 
 
     }
@@ -136,77 +132,78 @@ public class Main {
         }
         return maxSalaryEmployee;
     }
-        // Метод для индексации зарплаты на процент
-        public static void indexAllSalary ( double percent){
-            for (Employee empl : employees) {
-                double currentSalary = empl.getSalary();
-                double indexSalary = currentSalary * percent / 100 + currentSalary;
+
+    // Метод для индексации зарплаты на процент
+    public static void indexAllSalary(double percent) {
+        for (Employee empl : employees) {
+            double currentSalary = empl.getSalary();
+            double indexSalary = currentSalary * percent / 100 + currentSalary;
+            empl.setSalary(indexSalary);
+        }
+
+    }
+
+    // Метод для вычисления всей зарплаты на отдел
+    public static double calculateTotalSalaryInDepartment(int department) {
+        double totalSalary = 0;
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department) {
+                totalSalary += empl.getSalary();
+            }
+
+        }
+        return totalSalary;
+    }
+
+    public static double calculateAverageSalaryDepartment(int department) {
+        double totalSalary = 0;
+        int counter = 0;
+
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department) {
+                totalSalary += empl.getSalary();
+                counter++;
+            }
+        }
+        if (counter == 0) {
+            return 0;
+        }
+        return totalSalary / counter;
+    }
+
+    public static void indexAllSalaryInDepartment(double percent, int department) {
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department) {
+                double indexSalary = empl.getSalary() * (1 + percent / 100);
                 empl.setSalary(indexSalary);
-            }
-
-        }
-
-        // Метод для вычисления всей зарплаты на отдел
-        public static double calculateTotalSalaryInDepartment ( int department){
-            double totalSalary = 0;
-            for (Employee empl : employees) {
-                if (empl.getDepartment() == department) {
-                    totalSalary += empl.getSalary();
-                }
-
-            }
-            return totalSalary;
-        }
-
-        public static double calculateAverageSalaryDepartment ( int department){
-            double totalSalary = 0;
-            int counter = 0;
-
-            for (Employee empl : employees) {
-                if (empl.getDepartment() == department) {
-                    totalSalary += empl.getSalary();
-                    counter++;
-                }
-            }
-            if (counter == 0) {
-                return 0;
-            }
-            return totalSalary / counter;
-        }
-
-        public static void indexAllSalaryInDepartment ( double percent, int department){
-            for (Employee empl : employees) {
-                if (empl.getDepartment() == department) {
-                    double indexSalary = empl.getSalary() * (1 + percent / 100);
-                    empl.setSalary(indexSalary);
-                }
-            }
-        }
-
-        public static void printEmployeeInDepartment ( int department){
-            for (Employee empl : employees) {
-                if (empl.getDepartment() == department) {
-                    System.out.println(empl.getId() + " Ф.И.О " + empl.getFullName() + " " + empl.getSalary());
-                }
-            }
-        }
-
-        public static void printEmployeesWithSalaryBelow ( double number){
-            for (Employee empl : employees) {
-                if (empl.getSalary() < number) {
-                    System.out.println(empl.getId() + " " + empl.getFullName() + " " + empl.getSalary());
-                }
-            }
-        }
-
-        public static void printEmployeesWithSalaryAbove ( double number){
-            for (Employee empl : employees) {
-                if (empl.getSalary() > number) {
-                    System.out.println(empl.getId() + " " + empl.getFullName() + " " + empl.getSalary());
-                }
             }
         }
     }
+
+    public static void printEmployeeInDepartment(int department) {
+        for (Employee empl : employees) {
+            if (empl.getDepartment() == department) {
+                System.out.println(empl.getId() + " Ф.И.О " + empl.getFullName() + " " + empl.getSalary());
+            }
+        }
+    }
+
+    public static void printEmployeesWithSalaryBelow(double number) {
+        for (Employee empl : employees) {
+            if (empl.getSalary() < number) {
+                System.out.println(empl.getId() + " " + empl.getFullName() + " " + empl.getSalary());
+            }
+        }
+    }
+
+    public static void printEmployeesWithSalaryAbove(double number) {
+        for (Employee empl : employees) {
+            if (empl.getSalary() > number) {
+                System.out.println(empl.getId() + " " + empl.getFullName() + " " + empl.getSalary());
+            }
+        }
+    }
+}
 
 
 
