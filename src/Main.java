@@ -17,7 +17,7 @@ public class Main {
         System.out.println("Сотрудник с минимальной ЗП: " + findEmployeeWithMinSalary(employees));
         System.out.println("Сотрудник с максимальной ЗП: " + findEmployeeWithMaxSalary(employees));
         System.out.println("Вычисление средней ЗП:  "
-                + calculateAverageSalary(employees,calculateTotalSalaryExpenses(employees)));
+                + calculateAverageSalary(employees));
         printFullNamesOfEmployees(employees);
 
 
@@ -67,7 +67,8 @@ public class Main {
     }
 
     // Метод для расчета средней зарплаты.
-    public static double calculateAverageSalary(Employee[] employees, double totalSalary) {
+    public static double calculateAverageSalary(Employee[] employees) {
+        double totalSalary = calculateTotalSalaryExpenses(employees);
         int totalEmployees = employees.length;
         return totalSalary / totalEmployees;
     }
@@ -78,8 +79,3 @@ public class Main {
         }
     }
 }
-
-
-
-
-
