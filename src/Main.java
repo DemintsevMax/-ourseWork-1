@@ -21,7 +21,6 @@ public class Main {
         printFullNamesOfEmployees(employees);
 
 
-
     }
 
     public static void printAllEmployeesData(Employee[] employees) { // Метод для печати данных всех сотрудников.
@@ -72,9 +71,10 @@ public class Main {
         int totalEmployees = employees.length;
         return totalSalary / totalEmployees;
     }
+
     // Метод для печати полных имен всех сотрудников.
-    public static void printFullNamesOfEmployees(Employee[]employees){
-        for (Employee empl : employees){
+    public static void printFullNamesOfEmployees(Employee[] employees) {
+        for (Employee empl : employees) {
             System.out.println(empl.getFullName());
         }
     }
